@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        #{text.home} <br />
+        <h:form>
+            <h:commandLink value="#{text.addFilm}" action="add" /> <br />
+            <h:commandLink value="#{text.addShowing}" action="addShow" /> <br />
+            <h:commandLink value="Pokaz filmy" action="showMovie" /> <br />
+        </h:form>
+        
+        <br />
+            <p:link outcome="/film/List.xhtml" value="Show All Film Items" />
+            <br />
+            <p:link outcome="/hall/List.xhtml" value="Show All Hall Items"/>
+            <br />
+            <h:link outcome="/reservation/List.xhtml" value="Show All Reservation Items"/>
+            <br />
+            <h:link outcome="/showing/List.xhtml" value="Show All Showing Items"/>
+            <br />
+            <h:link outcome="/user/List.xhtml" value="Show All User Items"/>
+    </h:body>
+</html>
+

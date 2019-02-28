@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ShowingViewDlg" widgetVar="ShowingViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewShowingTitle}">
+            <h:form id="ShowingViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{showingController.selected != null}">
+                        <h:outputText value="#{bundle.ViewShowingLabel_id}"/>
+                        <h:outputText value="#{showingController.selected.id}" title="#{bundle.ViewShowingTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewShowingLabel_dateStart}"/>
+                        <h:outputText value="#{showingController.selected.dateStart}" title="#{bundle.ViewShowingTitle_dateStart}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewShowingLabel_dateEnd}"/>
+                        <h:outputText value="#{showingController.selected.dateEnd}" title="#{bundle.ViewShowingTitle_dateEnd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewShowingLabel_idFilm}"/>
+                        <h:outputText value="#{showingController.selected.idFilm}" title="#{bundle.ViewShowingTitle_idFilm}"/>
+                        <h:outputText value="#{bundle.ViewShowingLabel_idHall}"/>
+                        <h:outputText value="#{showingController.selected.idHall}" title="#{bundle.ViewShowingTitle_idHall}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ShowingViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

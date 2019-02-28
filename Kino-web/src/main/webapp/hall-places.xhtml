@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{languageController.locale}">
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body>
+            <h1>#{text.currentHall} #{userBean.showing.idHall.id}</h1> <br />
+            <h1>#{text.currentFilm} #{userBean.showing.idFilm.name}</h1> <br />
+
+            <h1>#{text.freePlaces}</h1> <br />
+            <h:form>
+                <h:dataTable value="#{reservationBean.findFreePlaces(userBean.showing)}" var="place" border="1">
+                    <h:column>    
+                        <h:commandLink value="#{place}" action="#{userBean.addReservation(place)}"/>
+                    </h:column>
+                    <!-- <h:column>    
+                         <h:selectOneMenu value="">
+                             <f:selectItem itemValue = "null" itemLabel = "" /> 
+                             <f:selectItem itemValue = "normalny" itemLabel = "" /> 
+                             <f:selectItem itemValue = "ulgowy" itemLabel = "" /> 
+                         </h:selectOneMenu>
+                     </h:column>
+                 <h:commandButton value="" /> -->
+                </h:dataTable>
+            </h:form>
+
+            <h:form>
+                <h:dataTable value="#{userBean.myReservations}" var="reservation" border="1">
+                    <h:column>
+                        <f:facet name="header">#{text.place}</f:facet>
+                            #{reservation.place}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.placeKind}</f:facet>
+                        <h:selectOneMenu value="#{reservation.placeKind}" > 
+                            <f:selectItem itemValue = "normalny" itemLabel = "#{text.normal}" /> 
+                            <f:selectItem itemValue = "ulgowy" itemLabel = "#{text.reduced}" /> 
+                        </h:selectOneMenu>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.currentFilm}</f:facet>
+                            #{reservation.idShowing.idFilm.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.currentHall}</f:facet>
+                            #{reservation.idShowing.idHall.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.price}</f:facet>
+                            #{reservation.price}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.email}</f:facet>
+                            #{reservation.idUser.email}
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton value="#{text.acctpt}" action="#{reservationBean.ticketUpdatePrices(userBean.myReservations)}" />
+            </h:form>
+
+        </h:body>
+    </f:view>
+</html>
+

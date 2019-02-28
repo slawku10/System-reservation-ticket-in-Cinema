@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{languageController.locale}">
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body>
+            <h:form>
+                <h:dataTable value="#{userBean.myReservations}" var="reservation" border="1">
+                    <h:column>
+                        <f:facet name="header">#{text.place}</f:facet>
+                            #{reservation.place}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.placeKind}</f:facet>
+                            #{reservation.placeKind}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.currentFilm}</f:facet>
+                            #{reservation.idShowing.idFilm.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.currentHall}</f:facet>
+                            #{reservation.idShowing.idHall.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.priceTicket}</f:facet>
+                            #{reservation.price}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{text.email}</f:facet>
+                            #{reservation.idUser.email}
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton value="#{text.acctpt}" action="#{reservationBean.ticketReserve(userBean.myReservations)}" />
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+

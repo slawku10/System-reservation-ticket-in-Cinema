@@ -1,0 +1,11 @@
+application\kino\model\Showing_.class
+application\kino\model\Hall_.class
+application\kino\model\Film_.class
+application\kino\model\User.class
+application\kino\model\User_.class
+application\kino\model\Hall.class
+application\kino\model\Reservation.class
+application\kino\model\Film.class
+application\kino\model\Mail.class
+application\kino\model\Reservation_.class
+application\kino\model\Showing.class

@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:t="http://java.sun.com/jsf/passthrough">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable value="#{hallBean.findAllHalls()}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{text.hallNumber}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{text.hallNumPlaces}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numOfPlaces}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{text.hallSelect}"/>
+                    </f:facet>
+                    <h:commandButton value="#{text.hallSelect}" action="#{showingBean.setHall(item)}" />
+                </h:column>
+            </h:dataTable>
+        </h:form> <br /> <br />
+
+        <h:form>
+            <h:dataTable value="#{filmBean.findAll()}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{text.filmName}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{text.filmType}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.type}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{text.filmDuration}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.duration}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{text.filmSelect}"/>
+                    </f:facet>
+                    <h:commandButton value="#{text.filmSelect}" action="#{showingBean.setFilm(item)}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+        <h:form>
+            #{text.hallNumber}: #{showingBean.showing.idHall.id} <br />
+            #{text.filmName}: #{showingBean.showing.idFilm.name} <br />
+            #{text.dateStart}: <h:inputText t:type="date" t:min="2016-12-31" value="#{showingBean.showing.dateStart}">
+                <f:convertDateTime pattern="yyyy-MM-dd"/>
+            </h:inputText><br />
+            #{text.dateEnd}: <h:inputText t:type="date" t:min="2016-12-31" value="#{showingBean.showing.dateEnd}">
+                <f:convertDateTime pattern="yyyy-MM-dd"/>
+            </h:inputText><br />
+            <h:commandButton value="#{text.acctpt}" action="#{showingBean.addShow()}" />
+        </h:form>
+    </h:body>
+</html>
+

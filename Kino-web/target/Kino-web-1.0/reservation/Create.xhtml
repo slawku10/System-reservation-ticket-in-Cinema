@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservationCreateDlg" widgetVar="ReservationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateReservationTitle}">
+            <h:form id="ReservationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{reservationController.selected.id}" title="#{bundle.CreateReservationTitle_id}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_place}" for="place" />
+                        <p:inputText id="place" value="#{reservationController.selected.place}" title="#{bundle.CreateReservationTitle_place}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_place}"/>
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_placeKind}" for="placeKind" />
+                        <p:inputText id="placeKind" value="#{reservationController.selected.placeKind}" title="#{bundle.CreateReservationTitle_placeKind}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{reservationController.selected.status}" title="#{bundle.CreateReservationTitle_status}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{reservationController.selected.price}" title="#{bundle.CreateReservationTitle_price}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_price}"/>
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_idShowing}" for="idShowing" />
+                        <p:selectOneMenu id="idShowing" value="#{reservationController.selected.idShowing}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_idShowing}">
+                            <f:selectItems value="#{showingController.itemsAvailableSelectOne}"
+                                           var="idShowingItem"
+                                           itemValue="#{idShowingItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_idUser}" for="idUser" />
+                        <p:selectOneMenu id="idUser" value="#{reservationController.selected.idUser}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_idUser}">
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="idUserItem"
+                                           itemValue="#{idUserItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservationController.create}" value="#{bundle.Save}" update="display,:ReservationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReservationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

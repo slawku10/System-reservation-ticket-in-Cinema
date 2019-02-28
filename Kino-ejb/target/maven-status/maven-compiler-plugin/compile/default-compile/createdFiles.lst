@@ -1,0 +1,10 @@
+application\facade\DefaultShowingFacade.class
+application\mail\DefaultMailFacade.class
+application\pdf\DefaultPdfFacade.class
+application\mail\MessageDrivenBean.class
+application\facade\DefaultReservationFacade.class
+application\facade\DefaultHallFacade.class
+application\facade\DefaultFilmFacade.class
+application\facade\DefaultUserFacade.class
+application\pdf\PdfItext.class
+application\facade\AbstractFacade.class

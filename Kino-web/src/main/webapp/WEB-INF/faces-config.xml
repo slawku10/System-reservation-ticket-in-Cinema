@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application>
+        <resource-bundle>
+            <base-name>application.lang.resources</base-name>
+            <var>text</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>  
+    
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>registration</from-action>
+            <from-outcome>registration</from-outcome>
+            <to-view-id>/registration.xhtml</to-view-id>
+        </navigation-case>        
+        <navigation-case>
+            <from-action>#{userBean.login()}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{userBean.login()}</from-action>
+            <from-outcome>fail</from-outcome>
+            <to-view-id>/bad-login.xhtml</to-view-id>
+        </navigation-case>    
+        <navigation-case>
+            <from-action>#{userBean.login()}</from-action>
+            <from-outcome>adminUser</from-outcome>
+            <to-view-id>/admin-home.xhtml</to-view-id>
+        </navigation-case>         
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/registration.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>#{userBean.register()}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+            
+    <navigation-rule>
+        <from-view-id>/home.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>reserv</from-action>
+            <from-outcome>reserv</from-outcome>
+            <to-view-id>/ticket-reservation.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>buy</from-action>
+            <from-outcome>buy</from-outcome>
+            <to-view-id>/ticket-buy.xhtml</to-view-id>
+        </navigation-case> 
+        <navigation-case>
+            <from-action>cancel</from-action>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/ticket-cancel.xhtml</to-view-id>
+        </navigation-case>         
+        <navigation-case>
+            <from-action>films</from-action>
+            <from-outcome>films</from-outcome>
+            <to-view-id>/showings.xhtml</to-view-id>
+        </navigation-case>               
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/ticket-reservation.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>#{userBean.selectHall(hall.id)}</from-action>
+            <from-outcome>hallSelected</from-outcome>
+            <to-view-id>/ticket-reservation-places.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/showings.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>#{userBean.selectShow(show)}</from-action>
+            <from-outcome>hallSelected</from-outcome>
+            <to-view-id>/hall-places.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/hall-places.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>#{reservationBean.ticketUpdatePrices(userBean.myReservations)}</from-action>
+            <from-outcome>toConfirm</from-outcome>
+            <to-view-id>/reservation-confirmation.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/reservation-confirmation.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>#{reservationBean.ticketReserve(userBean.myReservations)}</from-action>
+            <from-outcome>ticketReserved</from-outcome>
+            <to-view-id>/reservation-confirmed.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/reservation-confirmed.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>home</from-action>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/ticket-cancel.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>home</from-action>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/admin-home.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>add</from-action>
+            <from-outcome>add</from-outcome>
+            <to-view-id>/admin-add-film.xhtml</to-view-id>
+        </navigation-case>    
+        <navigation-case>
+            <from-action>addShow</from-action>
+            <from-outcome>addShow</from-outcome>
+            <to-view-id>/admin-add-show.xhtml</to-view-id>
+        </navigation-case>                           
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/admin-add-film.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>#{filmBean.addFilm()}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/admin-home.xhtml</to-view-id>
+        </navigation-case>            
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/admin-add-show.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-action>#{showingBean.addShow()}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/admin-home.xhtml</to-view-id>
+        </navigation-case>            
+    </navigation-rule>
+    
+</faces-config>

@@ -1,0 +1,8 @@
+application\kino\api\facade\DefaultFascade.class
+application\kino\api\pdf\PdfFacade.class
+application\kino\api\mail\MailFacade.class
+application\kino\api\facade\HallFacade.class
+application\kino\api\facade\ShowingFacade.class
+application\kino\api\facade\ReservationFacade.class
+application\kino\api\facade\FilmFascade.class
+application\kino\api\facade\UserFacade.class

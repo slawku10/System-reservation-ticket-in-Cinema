@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservationEditDlg" widgetVar="ReservationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditReservationTitle}">
+            <h:form id="ReservationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditReservationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{reservationController.selected.id}" title="#{bundle.EditReservationTitle_id}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditReservationLabel_place}" for="place" />
+                        <p:inputText id="place" value="#{reservationController.selected.place}" title="#{bundle.EditReservationTitle_place}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_place}"/>
+                        <p:outputLabel value="#{bundle.EditReservationLabel_placeKind}" for="placeKind" />
+                        <p:inputText id="placeKind" value="#{reservationController.selected.placeKind}" title="#{bundle.EditReservationTitle_placeKind}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{reservationController.selected.status}" title="#{bundle.EditReservationTitle_status}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{reservationController.selected.price}" title="#{bundle.EditReservationTitle_price}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_price}"/>
+                        <p:outputLabel value="#{bundle.EditReservationLabel_idShowing}" for="idShowing" />
+                        <p:selectOneMenu id="idShowing" value="#{reservationController.selected.idShowing}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_idShowing}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{showingController.itemsAvailableSelectOne}"
+                                           var="idShowingItem"
+                                           itemValue="#{idShowingItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditReservationLabel_idUser}" for="idUser" />
+                        <p:selectOneMenu id="idUser" value="#{reservationController.selected.idUser}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_idUser}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="idUserItem"
+                                           itemValue="#{idUserItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservationController.update}" value="#{bundle.Save}" update="display,:ReservationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReservationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
